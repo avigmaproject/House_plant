@@ -1,0 +1,6 @@
+module Pods_HousePlant {
+  umbrella header "Pods-HousePlant-umbrella.h"
+
+  export *
+  module * { export * }
+}

@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "806791915928",
+    "project_id": "houseplant-329609",
+    "storage_bucket": "houseplant-329609.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:806791915928:android:5f4939a8d4bd77572063ed",
+        "android_client_info": {
+          "package_name": "com.houseplant"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "806791915928-d99s7qj9tokh98m9b0tsfcj3b23icli7.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.houseplant",
+            "certificate_hash": "fb0182b90efcb6cf5e6907043c8b85fae47e7506"
+          }
+        },
+        {
+          "client_id": "806791915928-f4l21th0bbrquhqvn6922p599kidf4jb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBJsR0DeMnRGgqRLlT6QiTexgCncliLXSM"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "806791915928-f4l21th0bbrquhqvn6922p599kidf4jb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
