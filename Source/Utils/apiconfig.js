@@ -1,5 +1,7 @@
 import axios from "axios";
 import { API } from "./baseurl";
+import firebase from "@react-native-firebase/app";
+import messaging from "@react-native-firebase/messaging";
 
 // Create axios client, pre-configured with baseURL
 
@@ -155,4 +157,22 @@ export const userquizmasterdata = async (data, access_token) => {
     .catch((error) => {
       throw error;
     });
+};
+export const requestUserPermission = async () => {
+  let authStatus = await firebase.messaging().hasPermission();
+  if (
+    authStatus !== firebase.messaging.AuthorizationStatus.AUTHORIZED ||
+    messaging.AuthorizationStatus.PROVISIONAL
+  ) {
+    authStatus = await firebase.messaging().requestPermission();
+  }
+  if (authStatus === firebase.messaging.AuthorizationStatus.AUTHORIZED) {
+    return authStatus;
+  }
+};
+
+export const getFcmToken = async () => {
+  const fcmToken = await messaging().getToken();
+  console.log("hiiii", fcmToken);
+  return fcmToken;
 };

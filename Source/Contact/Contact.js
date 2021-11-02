@@ -8,6 +8,7 @@ import {
   Image,
   TouchableOpacity,
   StyleSheet,
+  Linking,
 } from "react-native";
 import Header from "../SmartComponent/Header";
 
@@ -28,8 +29,56 @@ export default class Contact extends Component {
               navigation={this.props.navigation}
               title={"Contact"}
             />
-            <ScrollView keyboardShouldPersistTaps="always">
-              <View style={{ marginTop: 50, marginHorizontal: 20 }}>
+            <View style={{ marginTop: 100, marginHorizontal: 20 }}>
+              <View>
+                <Image
+                  resizeMode={"stretch"}
+                  source={require("../../assets/plan_app_images/contact.png")}
+                  style={{
+                    width: "100%",
+                    height: 200,
+                    marginRight: 15,
+                    alignSelf: "center",
+                  }}
+                />
+              </View>
+              <View
+                style={{
+                  flexDirection: "row",
+                  alignItems: "center",
+                  paddingVertical: 10,
+                  marginTop: 50,
+                }}
+              >
+                <Image
+                  resizeMode={"stretch"}
+                  source={require("../../assets/plan_app_images/envelope-icon.png")}
+                  style={styles.icon}
+                />
+                <TouchableOpacity
+                  onPress={() =>
+                    Linking.openURL(
+                      "mailto:claire@houseplantresourcecenter.com"
+                    )
+                  }
+                >
+                  <Text
+                    style={{
+                      color: "#4E4E4E",
+                      ...styles.text,
+                      lineHeight: 25,
+                      fontStyle: "italic",
+                      textDecorationLine: "underline",
+                      textDecorationColor: "blue",
+                    }}
+                  >
+                    claire@houseplantresourcecenter.com
+                  </Text>
+                </TouchableOpacity>
+              </View>
+            </View>
+            {/* <ScrollView keyboardShouldPersistTaps="always"> */}
+            {/* <View style={{ marginTop: 50, marginHorizontal: 20 }}>
                 <View style={{ flex: 0.3 }}>
                   <Image
                     resizeMode={"stretch"}
@@ -116,31 +165,10 @@ export default class Contact extends Component {
                       (800-123-45686897)
                     </Text>
                   </View>
-                  <View
-                    style={{
-                      flexDirection: "row",
-                      alignItems: "center",
-                      paddingVertical: 10,
-                    }}
-                  >
-                    <Image
-                      resizeMode={"stretch"}
-                      source={require("../../assets/plan_app_images/envelope-icon.png")}
-                      style={styles.icon}
-                    />
-                    <Text
-                      style={{
-                        color: "#4E4E4E",
-                        ...styles.text,
-                        lineHeight: 25,
-                      }}
-                    >
-                      Support@fiddleleaffigplant.com
-                    </Text>
-                  </View>
+                  
                 </View>
-              </View>
-            </ScrollView>
+              </View> */}
+            {/* </ScrollView> */}
           </SafeAreaView>
         </ImageBackground>
       </View>
@@ -149,7 +177,7 @@ export default class Contact extends Component {
 }
 const styles = StyleSheet.create({
   text: {
-    fontSize: 12,
+    fontSize: 13,
     fontFamily: "Roboto-Medium",
   },
   icon: {

@@ -3,14 +3,12 @@ import {
   Text,
   View,
   ImageBackground,
-  Image,
   TouchableOpacity,
   SafeAreaView,
 } from "react-native";
 import { ScrollView } from "react-native-gesture-handler";
 import InputText from "../SmartComponent/InputText";
 import ButtonView from "../SmartComponent/ButtonView";
-import BouncyCheckbox from "react-native-bouncy-checkbox";
 import qs from "qs";
 import { connect } from "react-redux";
 import {
@@ -18,14 +16,11 @@ import {
   setToken,
   setUserType,
 } from "../store/action/auth/action";
-import { login } from "../Utils/apiconfig";
+import { login, requestUserPermission, getFcmToken } from "../Utils/apiconfig";
 import Spinner from "react-native-loading-spinner-overlay";
 import { RFPercentage } from "react-native-responsive-fontsize";
-// import {
-//   InsertUserMaster,
-//   queryAllUserMaster,
-// } from "../DatabseRealm/allSchemas";
-// import * as database from "../DatabseRealm/allSchemas";
+import { Snackbar } from "react-native-paper";
+
 class Login extends Component {
   constructor() {
     super();
@@ -39,26 +34,42 @@ class Login extends Component {
       access_token: "",
       clientid: 1,
       isLoading: false,
+      fcmtoken: "",
+      message: null,
+      color: "green",
+      visible: false,
     };
   }
-  onPressLogin1() {
-    console.log(Math.random(100));
-    let data = {
-      Id: Math.random(100),
-      Password: this.state.form.password,
-      Name: this.state.form.email,
-    };
-    database
-      .InsertPatientMaster(data)
-      .catch((error) => console.log("insert", error));
+  componentDidMount = async () => {
+    this.FcmMessage();
+  };
+  FcmMessage = async () => {
+    const authStatus = await requestUserPermission();
+    if (authStatus) {
+      const fcmtoken = await getFcmToken();
+      if (fcmtoken) {
+        this.setState({ fcmtoken });
+      } else {
+        this.setState({
+          color: "red",
+          visible: true,
+          message: "Something went wrong!!!!",
+        });
+      }
+    } else {
+      this.setState({
+        color: "red",
+        visible: true,
+        message: "Something went wrong!!!!",
+      });
+    }
+  };
+  onDismissSnackBar() {
+    this.setState({
+      visible: false,
+      message: null,
+    });
   }
-  onPressLogin1() {
-    database
-      .queryAllUserMaster()
-      .then((res) => alert(res[0][0].Name))
-      .catch((error) => console.log("queryAllUserMaster", error));
-  }
-
   Validation = () => {
     const { email, password } = this.state.form;
     this.setState({ isLoading: false });
@@ -262,6 +273,20 @@ class Login extends Component {
                 </TouchableOpacity>
               </View>
             </ScrollView>
+            <Snackbar
+              visible={this.state.visible}
+              onDismiss={() => console.log("Snackbar closed")}
+              style={{ backgroundColor: this.state.color }}
+              duration={1000}
+              action={{
+                label: "close",
+                onPress: () => {
+                  this.onDismissSnackBar();
+                },
+              }}
+            >
+              {this.state.message}
+            </Snackbar>
           </SafeAreaView>
         </ImageBackground>
       </View>

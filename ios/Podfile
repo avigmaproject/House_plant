@@ -20,6 +20,10 @@ target 'HousePlant' do
 
   # pod 'react-native-fbsdk', :path => '../node_modules/react-native-fbsdk'
 
+  pod 'RNFBMessaging', :path => '../node_modules/@react-native-firebase/messaging'
+
+  pod 'react-native-webview', :path => '../node_modules/react-native-webview'
+
   target 'HousePlantTests' do
     inherit! :complete
     # Pods for testing

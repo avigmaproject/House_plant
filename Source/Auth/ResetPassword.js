@@ -11,14 +11,15 @@ export default class ResetPassword extends Component {
   constructor() {
     super();
     this.state = {
+      message: null,
+      color: "green",
+      visible: false,
       ErrorPassword: null,
       ErrorCPassword: null,
       ErrorCPassword2: null,
       cpassword: null,
       password: null,
       email: null,
-      message: null,
-      color: "green",
       device: 1,
       isLoading: false,
     };

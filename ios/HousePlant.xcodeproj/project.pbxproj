@@ -12,6 +12,10 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		307988E3F4228CBCC723D47B /* libPods-HousePlant.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 152FD855221917F23E4A4B75 /* libPods-HousePlant.a */; };
 		34F8C02263E1808C0DE29102 /* libPods-HousePlant-HousePlantTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F20CC2940DB47455E68B97AB /* libPods-HousePlant-HousePlantTests.a */; };
+		414665AC272D0CC2004E9EAC /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41D674382701ECC8009B8333 /* Roboto-Light.ttf */; };
+		414665AD272D0CC6004E9EAC /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41D674392701ECC8009B8333 /* Roboto-Medium.ttf */; };
+		414665AE272D0CCA004E9EAC /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41D674362701ECC8009B8333 /* Roboto-Bold.ttf */; };
+		414665AF272D0CD0004E9EAC /* Roboto-Thin.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41D674352701ECC8009B8333 /* Roboto-Thin.ttf */; };
 		41A4F42F27298C1B00BBB34B /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		41D6743D2701ECC9009B8333 /* Roboto-Black.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41D674302701ECC8009B8333 /* Roboto-Black.ttf */; };
 		41D6743F2701ECC9009B8333 /* Roboto-ThinItalic.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41D674312701ECC8009B8333 /* Roboto-ThinItalic.ttf */; };
@@ -356,7 +360,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				414665AC272D0CC2004E9EAC /* Roboto-Light.ttf in Resources */,
 				41A4F42F27298C1B00BBB34B /* Images.xcassets in Resources */,
+				414665AE272D0CCA004E9EAC /* Roboto-Bold.ttf in Resources */,
+				414665AF272D0CD0004E9EAC /* Roboto-Thin.ttf in Resources */,
+				414665AD272D0CC6004E9EAC /* Roboto-Medium.ttf in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

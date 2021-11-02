@@ -11,7 +11,11 @@ import {
 import Header from "../SmartComponent/Header";
 import InputText from "../SmartComponent/InputText";
 import ButtonView from "../SmartComponent/ButtonView";
-import { userprofileupdate, registerStoreImage } from "../Utils/apiconfig";
+import {
+  userprofileupdate,
+  registerStoreImage,
+  userprofile,
+} from "../Utils/apiconfig";
 import { connect } from "react-redux";
 import { Avatar } from "react-native-paper";
 import { ActionSheetCustom as ActionSheet } from "react-native-actionsheet";
@@ -260,44 +264,45 @@ class Profile extends Component {
       });
   };
   GetUserProfile = async () => {
-    this.setState({
-      ...this.state,
-      form: {
-        ...this.state.form,
-        firstname: this.props.profile.User_Name,
-        phonenumber: this.props.profile.User_Phone,
-        email: this.props.profile.User_Email,
-        password: this.props.profile.User_Password,
-        imagePath: this.props.profile.User_Image_Path,
-      },
-    });
-    // this.setState({ isLoading: true });
-    // let data = {
-    //   User_PkeyID: 2,
-    //   Type: 2,
-    // };User_PkeyID
-    // console.log("userprofile", data, this.props.token);
-    // await userprofile(data, this.props.token)
-    //   .then((res) => {
-    //     console.log("res: ", res[0][0]);
-
-    //     this.setState({ isLoading: false, userdata: res[0] });
-    //   })
-    //   .catch((error) => {
-    //     if (error.response) {
-    //       this.setState({ isLoading: false });
-    //       console.log("error.response", error.response);
-    //     } else if (error.request) {
-    //       this.setState({ isLoading: false });
-    //       console.log("request error", error.request);
-    //     } else if (error) {
-    //       alert("Server Error");
-    //       this.setState({ isLoading: false });
-    //     }
-    //   });
+    this.setState({ isLoading: true });
+    let data = {
+      // User_PkeyID: 2,
+      Type: 2,
+    };
+    console.log("userprofile", data, this.props.token);
+    await userprofile(data, this.props.token)
+      .then((res) => {
+        console.log("res: ", res[0][0]);
+        this.setState({
+          ...this.state,
+          form: {
+            ...this.state.form,
+            firstname: res[0][0].User_Name,
+            phonenumber: res[0][0].User_Phone,
+            email: res[0][0].User_Email,
+            password: res[0][0].User_Password,
+            imagePath: res[0][0].User_Image_Path,
+          },
+          isLoading: false,
+          userdata: res[0],
+        });
+      })
+      .catch((error) => {
+        if (error.response) {
+          this.setState({ isLoading: false });
+          console.log("error.response", error.response);
+        } else if (error.request) {
+          this.setState({ isLoading: false });
+          console.log("request error", error.request);
+        } else if (error) {
+          alert("Server Error");
+          this.setState({ isLoading: false });
+        }
+      });
   };
   render() {
     const { firstname, phonenumber, email, password } = this.state.form;
+
     const {
       ErrorFirstName,
       ErrorPhoneNumber,
@@ -306,6 +311,7 @@ class Profile extends Component {
       ErrorPassword2,
       ErrorUserEmail,
     } = this.state;
+    console.log(this.props.profile);
     return (
       <View>
         <ImageBackground

@@ -73,7 +73,7 @@ export default class Welcome extends Component {
             <Image
               source={require("../../assets/fiddle-leaf-fig-plant-resource-logo.png")}
               resizeMode="stretch"
-              style={{ height: "80%", width: "30%" }}
+              style={{ height: "100%", width: "30%" }}
             />
           </View>
           <View
