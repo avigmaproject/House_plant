@@ -7,6 +7,7 @@ import { forgotpassword } from "../Utils/apiconfig";
 import dynamicLinks from "@react-native-firebase/dynamic-links";
 import { Snackbar } from "react-native-paper";
 import Spinner from "react-native-loading-spinner-overlay";
+import Header from "../SmartComponent/Header";
 
 export default class ForgotPassword extends Component {
   constructor() {
@@ -34,12 +35,12 @@ export default class ForgotPassword extends Component {
   }
   generateLink = async () => {
     const link = await dynamicLinks().buildShortLink({
-      link: `https://houseplant.page.link/forgetpassword/${this.state.email}`,
-      domainUriPrefix: "https://houseplant.page.link",
+      link: `https://houseplantrn.page.link/forgetpassword/${this.state.email}`,
+      domainUriPrefix: "https://houseplantrn.page.link",
       // ios: {
-      //   bundleId: "com.avigma.communv",
+      //   bundleId: "com.HousePlant",
       //   appStoreId: "1579823021",
-      //   fallbackUrl: "https://apps.apple.com/us/app/com.houseplant/id1535962213",
+      //   fallbackUrl: "https://apps.apple.com/us/app/com.HousePlant/id1535962213",
       // },
       android: {
         packageName: "com.houseplant",
@@ -96,9 +97,19 @@ export default class ForgotPassword extends Component {
           .catch((error) => {
             if (error.response) {
               console.log("responce_error", error.response);
-              this.setState({ isLoading: false });
+              this.setState({
+                isLoading: false,
+                color: "red",
+                visible: true,
+                message: "Some Response Error",
+              });
             } else if (error.request) {
-              this.setState({ isLoading: false });
+              this.setState({
+                isLoading: false,
+                color: "red",
+                visible: true,
+                message: "Some Request Error",
+              });
               console.log("request error", error.request);
             }
           });
@@ -145,10 +156,16 @@ export default class ForgotPassword extends Component {
       <View>
         <ImageBackground
           source={require("../../assets/plan_app_images/bg/forgot-password.jpg")}
-          resizeMode="cover"
+          resizeMode="stretch"
           style={{ height: "100%" }}
         >
           <SafeAreaView style={{ height: "100%" }}>
+            <Header
+              back={true}
+              search={false}
+              notification={false}
+              navigation={this.props.navigation}
+            />
             <ScrollView keyboardShouldPersistTaps="always">
               <View style={{ paddingHorizontal: 34, marginTop: 150 }}>
                 <Spinner visible={this.state.isLoading} />
@@ -177,7 +194,7 @@ export default class ForgotPassword extends Component {
                 onBlur={() => this.generateLink()}
               />
 
-              <View style={{ marginTop: 20, marginLeft: 20 }}>
+              <View style={{ marginTop: 20, marginLeft: 34 }}>
                 <ButtonView
                   onPress={() => this.onHandleForgotPassword()}
                   title="Send Link"

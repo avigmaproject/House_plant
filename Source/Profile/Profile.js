@@ -21,6 +21,9 @@ import { Avatar } from "react-native-paper";
 import { ActionSheetCustom as ActionSheet } from "react-native-actionsheet";
 import ImagePicker from "react-native-image-crop-picker";
 import { Snackbar } from "react-native-paper";
+import { setProfile } from "../store/action/profile/action";
+import Spinner from "react-native-loading-spinner-overlay";
+import KeyboardSpacer from "react-native-keyboard-spacer";
 
 const options = [
   "Cancel",
@@ -49,6 +52,7 @@ class Profile extends Component {
       imagePath: "",
       chnageimage: false,
       visible: false,
+      isLoading: false,
     };
   }
   componentDidMount = async () => {
@@ -147,7 +151,7 @@ class Profile extends Component {
       1000
     );
   };
-  ImageCamera = () => {
+  ImageCamera = async () => {
     setTimeout(
       function () {
         ImagePicker.openCamera({
@@ -181,8 +185,14 @@ class Profile extends Component {
     Keyboard.dismiss();
     const validate = this.Validation();
     console.log("validate", validate);
-    const { firstname, phonenumber, email, password, chnageimage, imagePath } =
-      this.state.form;
+    const {
+      firstname,
+      phonenumber,
+      email,
+      password,
+      chnageimage,
+      imagePath,
+    } = this.state.form;
     let data;
     if (!validate) {
       if (chnageimage) {
@@ -211,9 +221,12 @@ class Profile extends Component {
       await userprofileupdate(data, this.props.token)
         .then((res) => {
           console.log("res: ", res[0]);
-          this.setState({
-            visible: true,
-          });
+          this.setState(
+            {
+              visible: true,
+            },
+            () => this.GetUserProfile()
+          );
         })
         .catch((error) => {
           if (error.response) {
@@ -245,13 +258,16 @@ class Profile extends Component {
     await registerStoreImage(data, this.props.token)
       .then((res) => {
         console.log("res:profile", res[1]);
-        this.setState({
-          visible: true,
-          form: {
-            ...this.state.form,
-            imagePath: res[1],
+        this.setState(
+          {
+            visible: true,
+            form: {
+              ...this.state.form,
+              imagePath: res[1],
+            },
           },
-        });
+          () => this.GetUserProfile()
+        );
       })
       .catch((error) => {
         if (error.request) {
@@ -266,13 +282,13 @@ class Profile extends Component {
   GetUserProfile = async () => {
     this.setState({ isLoading: true });
     let data = {
-      // User_PkeyID: 2,
       Type: 2,
     };
-    console.log("userprofile", data, this.props.token);
+    // console.log("userprofile", data, this.props.token);
     await userprofile(data, this.props.token)
       .then((res) => {
         console.log("res: ", res[0][0]);
+        this.props.setProfile(res[0][0]);
         this.setState({
           ...this.state,
           form: {
@@ -310,121 +326,122 @@ class Profile extends Component {
       ErrorEmail,
       ErrorPassword2,
       ErrorUserEmail,
+      isLoading,
     } = this.state;
     console.log(this.props.profile);
+    const { profile } = this.props;
     return (
-      <View>
+      <SafeAreaView style={{ backgroundColor: "#53a20a" }}>
         <ImageBackground
-          source={require("../../assets/plan_app_images/bg/all-pages-bg.jpg")}
-          resizeMode="cover"
+          source={require("../../assets/plan_app_images/background.jpeg")}
+          resizeMode="stretch"
           style={{ height: "100%" }}
         >
-          <SafeAreaView style={{ height: "100%" }}>
-            <Header
-              back={true}
-              search={false}
-              notification={false}
-              navigation={this.props.navigation}
-              title={"My Profile"}
-            />
-            <ScrollView keyboardShouldPersistTaps="always">
-              <View style={{ marginTop: 80 }}>
-                <View
-                  style={{
-                    // backgroundColor: "pink",
-                    justifyContent: "center",
-                    alignItems: "center",
-                  }}
-                >
-                  <TouchableOpacity onPress={() => this.onPress()}>
-                    <Avatar.Image
-                      source={{
-                        uri: this.state.form.imagePath
-                          ? this.state.form.imagePath
-                          : "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/1200px-Unknown_person.jpg",
-                      }}
-                      size={120}
-                    />
-                  </TouchableOpacity>
-                </View>
-                <ActionSheet
-                  ref={(o) => (this.ActionSheet = o)}
-                  title={
-                    <Text style={{ color: "#53a20a", fontSize: 18 }}>
-                      Profile Photo
-                    </Text>
-                  }
-                  options={options}
-                  cancelButtonIndex={0}
-                  destructiveButtonIndex={4}
-                  useNativeDriver={true}
-                  onPress={(index) => {
-                    if (index === 0) {
-                      // cancel action
-                    } else if (index === 1) {
-                      this.ImageGallery();
-                    } else if (index === 2) {
-                      this.ImageCamera();
-                    }
-                  }}
-                />
-                <InputText
-                  title={"Name"}
-                  onChangeText={(text) =>
-                    this.onHandleChange("firstname", text)
-                  }
-                  error={ErrorFirstName}
-                  value={firstname}
-                />
-                <InputText
-                  title={"Email Address"}
-                  onChangeText={(text) => this.onHandleChange("email", text)}
-                  error={ErrorEmail || ErrorUserEmail}
-                  value={email}
-                  editable={false}
-                />
-                <InputText
-                  title={"Password"}
-                  onChangeText={(text) => this.onHandleChange("password", text)}
-                  error={ErrorPassword || ErrorPassword2}
-                  value={password}
-                  secureTextEntry={true}
-                />
-                <InputText
-                  title={"Phone Number"}
-                  onChangeText={(text) =>
-                    this.onHandleChange("phonenumber", text)
-                  }
-                  error={ErrorPhoneNumber}
-                  value={phonenumber}
-                  maxLength={10}
-                  keyboardType={"phone-pad"}
-                />
+          <Spinner visible={isLoading} />
+
+          <Header
+            back={true}
+            search={false}
+            notification={false}
+            navigation={this.props.navigation}
+            title={"My Profile"}
+          />
+          <ScrollView keyboardShouldPersistTaps="always">
+            <View style={{ marginTop: 30 }}>
+              <View
+                style={{
+                  // backgroundColor: "pink",
+                  justifyContent: "center",
+                  alignItems: "center",
+                }}
+              >
+                <TouchableOpacity onPress={() => this.onPress()}>
+                  <Avatar.Image
+                    source={{
+                      uri: this.state.form.imagePath
+                        ? this.state.form.imagePath
+                        : "https://upload.wikimedia.org/wikipedia/commons/thumb/b/bc/Unknown_person.jpg/1200px-Unknown_person.jpg",
+                    }}
+                    size={120}
+                  />
+                </TouchableOpacity>
               </View>
+              <ActionSheet
+                ref={(o) => (this.ActionSheet = o)}
+                title={
+                  <Text style={{ color: "#53a20a", fontSize: 18 }}>
+                    Profile Photo
+                  </Text>
+                }
+                options={options}
+                cancelButtonIndex={0}
+                destructiveButtonIndex={4}
+                useNativeDriver={true}
+                onPress={(index) => {
+                  if (index === 0) {
+                    // cancel action
+                  } else if (index === 1) {
+                    this.ImageGallery();
+                  } else if (index === 2) {
+                    this.ImageCamera();
+                  }
+                }}
+              />
+              <InputText
+                title={"Name"}
+                onChangeText={(text) => this.onHandleChange("firstname", text)}
+                error={ErrorFirstName}
+                value={firstname}
+              />
+              <InputText
+                title={"Email Address"}
+                onChangeText={(text) => this.onHandleChange("email", text)}
+                error={ErrorEmail || ErrorUserEmail}
+                value={email}
+                editable={false}
+              />
+              <InputText
+                title={"Password"}
+                onChangeText={(text) => this.onHandleChange("password", text)}
+                error={ErrorPassword || ErrorPassword2}
+                value={password}
+                secureTextEntry={true}
+              />
+              <InputText
+                title={"Phone Number"}
+                onChangeText={(text) =>
+                  this.onHandleChange("phonenumber", text)
+                }
+                error={ErrorPhoneNumber}
+                value={phonenumber}
+                maxLength={10}
+                keyboardType={"phone-pad"}
+              />
               <View style={{ marginTop: 20, alignSelf: "center" }}>
                 <ButtonView
                   onPress={() => this.UpdateProfile()}
                   title="Save Changes"
                 />
               </View>
-              <Snackbar
-                visible={this.state.visible}
-                onDismiss={() => console.log("close")}
-                style={{ backgroundColor: "#53a20a" }}
-                duration={1000}
-                action={{
-                  label: "close",
-                  onPress: () => {
-                    this.onDismissSnackBar();
-                  },
-                }}
-              >
-                Your profile is updated successfully
-              </Snackbar>
-            </ScrollView>
-          </SafeAreaView>
+            </View>
+            <KeyboardSpacer />
+            <Snackbar
+              visible={this.state.visible}
+              onDismiss={() => console.log("close")}
+              style={{ backgroundColor: "#53a20a" }}
+              duration={1000}
+              action={{
+                label: "close",
+                onPress: () => {
+                  this.onDismissSnackBar();
+                },
+              }}
+            >
+              Your profile is updated successfully
+            </Snackbar>
+          </ScrollView>
         </ImageBackground>
-      </View>
+      </SafeAreaView>
     );
   }
 }
@@ -433,4 +450,7 @@ const mapStateToProps = (state, ownProps) => ({
   profile: state.profileReducer.profile,
 });
 
-export default connect(mapStateToProps)(Profile);
+const mapDispatchToProps = {
+  setProfile,
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Profile);

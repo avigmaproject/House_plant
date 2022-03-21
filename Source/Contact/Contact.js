@@ -11,74 +11,140 @@ import {
   Linking,
 } from "react-native";
 import Header from "../SmartComponent/Header";
+import { RFPercentage } from "react-native-responsive-fontsize";
 
 export default class Contact extends Component {
   render() {
     return (
-      <View>
+      <SafeAreaView style={{ backgroundColor: "#53a20a" }}>
         <ImageBackground
-          source={require("../../assets/plan_app_images/bg/all-pages-bg.jpg")}
-          resizeMode="cover"
+          source={require("../../assets/plan_app_images/background.jpeg")}
+          resizeMode="stretch"
           style={{ height: "100%" }}
         >
-          <SafeAreaView>
-            <Header
-              back={false}
-              search={true}
-              notification={true}
-              navigation={this.props.navigation}
-              title={"Contact"}
-            />
-            <View style={{ marginTop: 100, marginHorizontal: 20 }}>
-              <View>
-                <Image
-                  resizeMode={"stretch"}
-                  source={require("../../assets/plan_app_images/contact.png")}
-                  style={{
-                    width: "100%",
-                    height: 200,
-                    marginRight: 15,
-                    alignSelf: "center",
-                  }}
-                />
-              </View>
-              <View
+          <Header
+            back={true}
+            search={false}
+            notification={false}
+            navigation={this.props.navigation}
+            title={"Contact Us"}
+          />
+          <View
+            style={{
+              marginTop: 10,
+              marginHorizontal: 20,
+              // backgroundColor: "green",
+            }}
+          >
+            <View
+              style={{
+                width: "100%",
+                height: "30%",
+                // justifyContent: "center",
+                // backgroundColor: "orange",
+              }}
+            >
+              <Image
+                resizeMode={"contain"}
+                source={require("../../assets/plan_app_images/contact.png")}
                 style={{
-                  flexDirection: "row",
-                  alignItems: "center",
-                  paddingVertical: 10,
-                  marginTop: 50,
+                  width: "100%",
+                  height: "90%",
+                  marginRight: 15,
+                  alignSelf: "center",
+                }}
+              />
+            </View>
+            <View
+              style={{
+                width: "100%",
+                // height: "30%",
+                justifyContent: "center",
+                // backgroundColor: "pink",
+                // backgroundColor: "red",
+                padding: 5,
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: "Roboto-Medium",
+                  // alignSelf: "center",
+                  lineHeight: 25,
                 }}
               >
-                <Image
-                  resizeMode={"stretch"}
-                  source={require("../../assets/plan_app_images/envelope-icon.png")}
-                  style={styles.icon}
-                />
-                <TouchableOpacity
-                  onPress={() =>
-                    Linking.openURL(
-                      "mailto:claire@houseplantresourcecenter.com"
-                    )
-                  }
-                >
-                  <Text
-                    style={{
-                      color: "#4E4E4E",
-                      ...styles.text,
-                      lineHeight: 25,
-                      fontStyle: "italic",
-                      textDecorationLine: "underline",
-                      textDecorationColor: "blue",
-                    }}
-                  >
-                    claire@houseplantresourcecenter.com
-                  </Text>
-                </TouchableOpacity>
-              </View>
+                {/* 2)If you need assistance, please check for answer 3) */}
+                Thanks for visiting the Houseplant Resource Center App. We love
+                to hear from our users, so please let us know how you’re
+                enjoying your app experience, as well as what you’d like to see
+                from us in the future. Please feel free to report any bugs or
+                glitches to us as well. The best way to get in touch with our
+                team is by sending an email to:
+              </Text>
             </View>
-            {/* <ScrollView keyboardShouldPersistTaps="always"> */}
-            {/* <View style={{ marginTop: 50, marginHorizontal: 20 }}>
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+                // paddingVertical: 10,
+                // marginTop: 50,
+                height: "8%",
+                // backgroundColor: "green",
+              }}
+            >
+              <Image
+                resizeMode={"contain"}
+                source={require("../../assets/plan_app_images/envelope-icon.png")}
+                style={styles.icon}
+              />
+              <TouchableOpacity
+                style={{ width: "90%" }}
+                onPress={() =>
+                  Linking.openURL(
+                    "mailto:claire@houseplantresourcecenter.com?cc=claire@houseplantresourcecenter.com&subject=&body="
+                  )
+                }
+              >
+                <Text
+                  style={{
+                    color: "#53a20a",
+                    ...styles.text,
+                    lineHeight: 25,
+                    fontStyle: "italic",
+                    textDecorationLine: "underline",
+                    textDecorationColor: "blue",
+                  }}
+                >
+                  claire@houseplantresourcecenter.com
+                </Text>
+              </TouchableOpacity>
+            </View>
+            <View
+              style={{
+                // backgroundColor: "pink",
+                // height: "30%",
+                justifyContent: "center",
+                alignItems: "center",
+                padding: 5,
+              }}
+            >
+              <Text
+                style={{
+                  fontFamily: "Roboto-Medium",
+                  lineHeight: 25,
+                }}
+              >
+                For personalized houseplant help and advice, be sure to
+                subscribe to our premium membership.
+                {/* (we should hyperlink premium
+                membership to the signup page)  */}
+                It offers advanced features like our “Ask the Fiddle Leaf Fig
+                Doctor” service!
+              </Text>
+            </View>
+          </View>
+
+          {/* <ScrollView keyboardShouldPersistTaps="always"> */}
+          {/* <View style={{ marginTop: 50, marginHorizontal: 20 }}>
                 <View style={{ flex: 0.3 }}>
                   <Image
                     resizeMode={"stretch"}
@@ -165,20 +231,19 @@ export default class Contact extends Component {
                       (800-123-45686897)
                     </Text>
                   </View>
-                  
+
                 </View>
               </View> */}
-            {/* </ScrollView> */}
-          </SafeAreaView>
+          {/* </ScrollView> */}
         </ImageBackground>
-      </View>
+      </SafeAreaView>
     );
   }
 }
 const styles = StyleSheet.create({
   text: {
-    fontSize: 13,
-    fontFamily: "Roboto-Medium",
+    fontSize: RFPercentage(2),
+    fontFamily: "Roboto-Bold",
   },
   icon: {
     width: 30,

@@ -11,16 +11,57 @@ import {
 import Header from "../SmartComponent/Header";
 import ButtonView from "../SmartComponent/ButtonView";
 
-export default class Membership extends Component {
+class Membership extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      DATA: [],
+      isLoading: false,
+    };
+  }
+
+  componentDidMount = () => {
+    this.Pay();
+    this.GetProductInfo();
+  };
+
+  GetProductInfo = async () => {
+    let product = await fetch(
+      "https://api.stripe.com/v1/products/prod_KrlLMmhTBhXTA9",
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${STRIPE_SECKRET_KEY}`,
+        },
+        method: "get",
+      }
+    ).then((response) => response.json());
+    console.log(product);
+    let Price = await fetch(
+      "https://api.stripe.com/v1/prices/price_1KCjM5GJpgN7Tc88Bd8VrVj5",
+      {
+        headers: {
+          Accept: "application/json",
+          "Content-Type": "application/x-www-form-urlencoded",
+          Authorization: `Bearer ${STRIPE_SECKRET_KEY}`,
+        },
+        method: "get",
+      }
+    ).then((response) => response.json());
+    console.log(Price);
+  };
+  Pay = async () => {};
+
   render() {
     return (
       <View>
         <ImageBackground
-          source={require("../../assets/plan_app_images/bg/all-pages-bg.jpg")}
-          resizeMode="cover"
+          source={require("../../assets/plan_app_images/background.jpeg")}
+          resizeMode="stretch"
           style={{ height: "100%" }}
         >
-          <SafeAreaView style={{ height: "100%" }}>
+          <SafeAreaView style={{ height: "100%", backgroundColor: "#53a20a" }}>
             <Header
               back={true}
               search={false}
@@ -30,9 +71,10 @@ export default class Membership extends Component {
             />
             <View style={{ marginTop: "20%" }}>
               <Image
-                resizeMode={"stretch"}
+                resizeMode={"contain"}
                 source={{
-                  uri: "https://media.ugaoo.com/catalog/product/cache/81d2f56800d33f099d2b369affd8e374/f/i/fiddleleaffigmedium_45.png",
+                  uri:
+                    "https://media.ugaoo.com/catalog/product/cache/81d2f56800d33f099d2b369affd8e374/f/i/fiddleleaffigmedium_45.png",
                 }}
                 style={{
                   width: "60%",
@@ -73,7 +115,7 @@ export default class Membership extends Component {
                 </Text>
               </View>
               <View style={{ marginTop: 20, alignSelf: "center" }}>
-                <ButtonView onPress={() => alert("Pay")} title="Pay Now" />
+                <ButtonView onPress={() => this.Pay()} title="Pay Now" />
               </View>
             </View>
           </SafeAreaView>
@@ -82,3 +124,5 @@ export default class Membership extends Component {
     );
   }
 }
+
+export default Membership;

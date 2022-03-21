@@ -3,6 +3,8 @@ import { Text, View, ImageBackground, Image, SafeAreaView } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
 import Button from "../SmartComponent/Button";
 import ButtonView from "../SmartComponent/ButtonView";
+import Header from "../SmartComponent/Header";
+
 export default class SuccessPage extends Component {
   componentDidMount() {
     console.log(this.props.route.params.register);
@@ -16,17 +18,23 @@ export default class SuccessPage extends Component {
             resizeMode="cover"
             style={{ height: "100%" }}
           >
+            <Header
+              back={true}
+              search={false}
+              notification={false}
+              navigation={this.props.navigation}
+            />
             <View
               style={{
                 justifyContent: "center",
                 alignItems: "center",
                 // backgroundColor: "pink",
-                height: "110%",
+                height: "90%",
               }}
             >
               <Image
                 source={require("../../assets/fiddle-leaf-fig-plant-resource-logo.png")}
-                resizeMode="stretch"
+                resizeMode="contain"
                 style={{ height: "15%", width: "30%" }}
               />
               <Text
@@ -55,6 +63,12 @@ export default class SuccessPage extends Component {
             style={{ height: "100%" }}
           >
             <SafeAreaView style={{ height: "100%" }}>
+              <Header
+                back={true}
+                search={false}
+                notification={false}
+                navigation={this.props.navigation}
+              />
               <View>
                 <View
                   style={{

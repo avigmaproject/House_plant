@@ -1,7 +1,8 @@
 import React, { Component } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import LinearGradient from "react-native-linear-gradient";
-
+import Feather from "react-native-vector-icons/Feather";
+import MaterialCommunityIcons from "react-native-vector-icons/MaterialCommunityIcons";
 export default class ButtonView extends Component {
   render() {
     return (
@@ -21,7 +22,7 @@ export default class ButtonView extends Component {
             flexDirection: "row",
             // width: "80%",
             borderRadius: 50,
-            paddingVertical: "4%",
+            paddingVertical: this.props.icon ? "12%" : "4%",
             paddingHorizontal: "11%",
           }}
         >
@@ -32,9 +33,18 @@ export default class ButtonView extends Component {
               alignItems: "center",
             }}
           >
-            <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 20 }}>
-              {this.props.title}
-            </Text>
+            {this.props.icon && (
+              <MaterialCommunityIcons
+                name="image-plus"
+                size={30}
+                color="#fff"
+              />
+            )}
+            {this.props.title && (
+              <Text style={{ color: "#fff", fontWeight: "bold", fontSize: 20 }}>
+                {this.props.title}
+              </Text>
+            )}
           </View>
         </LinearGradient>
       </TouchableOpacity>

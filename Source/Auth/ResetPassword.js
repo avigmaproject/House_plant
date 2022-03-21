@@ -6,6 +6,7 @@ import ButtonView from "../SmartComponent/ButtonView";
 import { resetpassword } from "../Utils/apiconfig";
 import { Snackbar } from "react-native-paper";
 import Spinner from "react-native-loading-spinner-overlay";
+import Header from "../SmartComponent/Header";
 
 export default class ResetPassword extends Component {
   constructor() {
@@ -138,6 +139,13 @@ export default class ResetPassword extends Component {
         >
           <SafeAreaView style={{ height: "100%" }}>
             <ScrollView keyboardShouldPersistTaps="always">
+              <Header
+                back={true}
+                search={false}
+                notification={false}
+                auth={true}
+                navigation={this.props.navigation}
+              />
               <View style={{ paddingHorizontal: 34, marginTop: 150 }}>
                 <Spinner visible={this.state.isLoading} />
                 <Text

@@ -13,7 +13,7 @@ export default class Button extends Component {
           justifyContent: "center",
           alignItems: "center",
           marginTop: 10,
-          flex: 0.1,
+          // flex: 0.1,
         }}
       >
         <LinearGradient

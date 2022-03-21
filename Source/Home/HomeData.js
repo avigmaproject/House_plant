@@ -8,34 +8,38 @@ import {
   Linking,
 } from "react-native";
 import AntDesign from "react-native-vector-icons/AntDesign";
+import { WebView } from "react-native-webview";
 
 export default class HomeData extends Component {
   OpenUrl = async (url) => {
-    const supported = await Linking.canOpenURL(url);
-    if (supported) {
-      await Linking.openURL(url);
-    } else {
-      Alert.alert(`Don't know how to open this URL: ${url}`);
-    }
+    this.props.navigation.navigate("Faq", { url, title: "Products" });
+    // const supported = await Linking.canOpenURL(url);
+    // if (supported) {
+    //   await Linking.openURL(url);
+    // } else {
+    //   Alert.alert(`Don't know how to open this URL: ${url}`);
+    // }
   };
   render() {
     return (
-      <View style={{ marginTop: 40 }}>
+      <View style={{ marginTop: 10 }}>
         <FlatList
           numColumns={2}
           data={this.props.Data}
+          refreshControl={this.props.refreshControl}
           renderItem={({ item }) => {
             return (
               <View
                 style={{
-                  // backgroundColor: 'pink',
+                  // backgroundColor: "pink",
                   width: "50%",
                   justifyContent: "center",
                   alignItems: "center",
                   marginTop: 20,
                 }}
               >
-                <View
+                <TouchableOpacity
+                  onPress={() => this.OpenUrl(item.HP_WebLsiteink)}
                   style={{
                     width: "90%",
                     backgroundColor: "#fff",
@@ -44,7 +48,7 @@ export default class HomeData extends Component {
                   }}
                 >
                   <Image
-                    resizeMode={"stretch"}
+                    resizeMode="contain"
                     source={{ uri: item.Hp_Image }}
                     style={{
                       width: 120,
@@ -57,10 +61,12 @@ export default class HomeData extends Component {
                     style={{
                       marginTop: 10,
                       // backgroundColor: "pink",
-                      height: 40,
+                      // height: 60,
                     }}
                   >
                     <Text
+                      ellipsizeMode="tail"
+                      numberOfLines={2}
                       style={{
                         textTransform: "capitalize",
                       }}
@@ -97,7 +103,7 @@ export default class HomeData extends Component {
                       <AntDesign name="arrowright" size={20} color="#fff" />
                     </TouchableOpacity>
                   </View>
-                </View>
+                </TouchableOpacity>
               </View>
             );
           }}

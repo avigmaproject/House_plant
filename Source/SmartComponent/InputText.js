@@ -33,15 +33,23 @@ export default class InputText extends Component {
         <View
           style={{
             backgroundColor: "#fff",
-            height: 60,
+            height: this.props.height ? this.props.height : 60,
             justifyContent: "center",
             alignItems: "center",
-            width: "85%",
-            borderRadius: 50,
+            width: "90%",
+            borderRadius: this.props.redius ? this.props.redius : 50,
+            borderColor: "#4E4E4E",
+            borderWidth: this.props.borderWidth,
           }}
         >
           <TextInput
-            style={{ height: 50, width: "95%", paddingLeft: 20 }}
+            style={{
+              textAlignVertical: this.props.textAlignVertical,
+              height: this.props.height ? this.props.height : 50,
+              width: "91%",
+              paddingLeft: 20,
+              paddingTop: this.props.textAlignVertical ? 30 : null,
+            }}
             keyboardType={this.props.keyboardType}
             onChangeText={this.props.onChangeText}
             value={this.props.value}
@@ -50,6 +58,8 @@ export default class InputText extends Component {
             maxLength={this.props.maxLength}
             secureTextEntry={this.props.secureTextEntry}
             editable={this.props.editable}
+            multiline={this.props.multiline}
+            numberOfLines={this.props.noOfiline}
           />
         </View>
         {this.props.error && (

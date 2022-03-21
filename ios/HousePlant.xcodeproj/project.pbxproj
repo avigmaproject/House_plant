@@ -12,6 +12,7 @@
 		13B07FC11A68108700A75B9A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		307988E3F4228CBCC723D47B /* libPods-HousePlant.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 152FD855221917F23E4A4B75 /* libPods-HousePlant.a */; };
 		34F8C02263E1808C0DE29102 /* libPods-HousePlant-HousePlantTests.a in Frameworks */ = {isa = PBXBuildFile; fileRef = F20CC2940DB47455E68B97AB /* libPods-HousePlant-HousePlantTests.a */; };
+		412C5AE12785857A00418EB5 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 412C5AE02785857900418EB5 /* GoogleService-Info.plist */; };
 		414665AC272D0CC2004E9EAC /* Roboto-Light.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41D674382701ECC8009B8333 /* Roboto-Light.ttf */; };
 		414665AD272D0CC6004E9EAC /* Roboto-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41D674392701ECC8009B8333 /* Roboto-Medium.ttf */; };
 		414665AE272D0CCA004E9EAC /* Roboto-Bold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 41D674362701ECC8009B8333 /* Roboto-Bold.ttf */; };
@@ -62,7 +63,9 @@
 		3A9F3EB06F4C4F0A8456BFC9 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-ThinItalic.ttf"; path = "../assets/fonts/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
 		3D5F6FD6CEAE4EECA934812D /* Roboto-Light.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = "Roboto-Light.ttf"; path = "../assets/fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
 		3E121FE3266641348CBF792A /* FontAwesome.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome.ttf"; sourceTree = "<group>"; };
+		412C5AE02785857900418EB5 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		419536662729AFF30071E6E9 /* libRNVectorIcons.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; path = libRNVectorIcons.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		41A0C75C2785BCE5003087F5 /* HousePlant.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = HousePlant.entitlements; path = HousePlant/HousePlant.entitlements; sourceTree = "<group>"; };
 		41D674302701ECC8009B8333 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Black.ttf"; sourceTree = "<group>"; };
 		41D674312701ECC8009B8333 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
 		41D674322701ECC8009B8333 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Roboto-Italic.ttf"; sourceTree = "<group>"; };
@@ -142,7 +145,9 @@
 		13B07FAE1A68108700A75B9A /* HousePlant */ = {
 			isa = PBXGroup;
 			children = (
+				41A0C75C2785BCE5003087F5 /* HousePlant.entitlements */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
+				412C5AE02785857900418EB5 /* GoogleService-Info.plist */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
 				13B07FB51A68108700A75B9A /* Images.xcassets */,
 				13B07FB61A68108700A75B9A /* Info.plist */,
@@ -365,6 +370,7 @@
 				414665AE272D0CCA004E9EAC /* Roboto-Bold.ttf in Resources */,
 				414665AF272D0CD0004E9EAC /* Roboto-Thin.ttf in Resources */,
 				414665AD272D0CC6004E9EAC /* Roboto-Medium.ttf in Resources */,
+				412C5AE12785857A00418EB5 /* GoogleService-Info.plist in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -617,7 +623,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = HousePlant/HousePlant.entitlements;
+				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_TEAM = HW4C467873;
 				ENABLE_BITCODE = NO;
 				INFOPLIST_FILE = HousePlant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -643,7 +651,9 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
-				CURRENT_PROJECT_VERSION = 1;
+				CODE_SIGN_ENTITLEMENTS = HousePlant/HousePlant.entitlements;
+				CURRENT_PROJECT_VERSION = 11;
+				DEVELOPMENT_TEAM = HW4C467873;
 				INFOPLIST_FILE = HousePlant/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

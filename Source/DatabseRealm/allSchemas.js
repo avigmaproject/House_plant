@@ -28,9 +28,9 @@ export const Answer_Master = {
   },
 };
 const databaseOptions = {
-  path: "houseplant40.realm",
+  path: "houseplant41.realm",
   schema: [Quiz_Master, Answer_Master],
-  schemaVersion: 17,
+  schemaVersion: 18,
 };
 export const InsertAnswerMaster = (data) =>
   new Promise((resolve, reject) => {
@@ -39,7 +39,7 @@ export const InsertAnswerMaster = (data) =>
         realm.write(() => {
           realm.create(Answer_Master_Schema, data);
           resolve();
-          console.log("success");
+          // console.log("success");
         });
       })
       .catch((error) => {
@@ -52,7 +52,7 @@ export const queryAllAnswerMaster = () =>
     Realm.open(databaseOptions)
       .then((realm) => {
         let asnwer = realm.objects(Answer_Master_Schema);
-        console.log("single user data", JSON.parse(JSON.stringify(asnwer)));
+        // console.log("single user data", JSON.parse(JSON.stringify(asnwer)));
         resolve([JSON.parse(JSON.stringify(asnwer))]);
       })
       .catch((error) => {
@@ -62,7 +62,7 @@ export const queryAllAnswerMaster = () =>
   });
 export const InsertQuizMaster = (data) =>
   new Promise((resolve, reject) => {
-    console.log("InsertQuizMaster", data);
+    // console.log("InsertQuizMaster", data);
     Realm.open(databaseOptions)
       .then((realm) => {
         realm.write(() => {
@@ -83,11 +83,27 @@ export const queryAllQuizMaster = (data) =>
         let user = realm
           .objects(Quiz_Master_Schema)
           .filtered(`QZ_PkeyID = ${data}`);
-        console.log("single user data", JSON.parse(JSON.stringify(user)));
+        // console.log("single user data", JSON.parse(JSON.stringify(user)));
         resolve([JSON.parse(JSON.stringify(user))]);
       })
       .catch((error) => {
         console.log("queryAllQuizMastererror", error);
+        reject(error);
+      });
+  });
+export const DeleteQuizMaster = () =>
+  new Promise((resolve, reject) => {
+    Realm.open(databaseOptions)
+      .then((realm) => {
+        realm.write(() => {
+          let QuizMaster = realm.objects(Quiz_Master_Schema); //.filtered('Inv_Con_pkeyId = "' + id + '"');
+          realm.delete(QuizMaster);
+          resolve();
+          console.log("successdeleteQuizMaster");
+        });
+      })
+      .catch((error) => {
+        console.log("DeleteAnserMaster", error);
         reject(error);
       });
   });

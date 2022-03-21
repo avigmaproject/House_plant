@@ -5,6 +5,9 @@
 #import <React/RCTRootView.h>
 #import <FBSDKCoreKit/FBSDKCoreKit.h>
 #import <RNGoogleSignin/RNGoogleSignin.h>
+#import <Firebase.h>
+#import <React/RCTLinkingManager.h>
+
 #ifdef FB_SONARKIT_ENABLED
 #import <FlipperKit/FlipperClient.h>
 #import <FlipperKitLayoutPlugin/FlipperKitLayoutPlugin.h>
@@ -28,6 +31,9 @@ static void InitializeFlipper(UIApplication *application) {
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions
 {
+  if ([FIRApp defaultApp] == nil) {
+     [FIRApp configure];
+   }
 #ifdef FB_SONARKIT_ENABLED
   InitializeFlipper(application);
 #endif
@@ -60,6 +66,20 @@ static void InitializeFlipper(UIApplication *application) {
 #endif
 }
 - (BOOL)application:(UIApplication *)application
+openURL:(NSURL *)url
+options:(NSDictionary<UIApplicationOpenURLOptionsKey,id> *)options
+{
+return [RCTLinkingManager application:application openURL:url options:options];
+}
+-(BOOL)application:(UIApplication *)application continueUserActivity:(nonnull NSUserActivity *)userActivity
+restorationHandler:(nonnull void (^)(NSArray<id> * _Nullable))restorationHandler
+{
+return [RCTLinkingManager application:application
+continueUserActivity:userActivity
+restorationHandler:restorationHandler];
+}
+
+- (BOOL)application:(UIApplication *)application
             openURL:(NSURL *)url
   sourceApplication:(NSString *)sourceApplication
          annotation:(id)annotation {
@@ -68,4 +88,7 @@ static void InitializeFlipper(UIApplication *application) {
                                                sourceApplication:sourceApplication
                                                       annotation:annotation];
 }
+
+
+
 @end

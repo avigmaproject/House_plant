@@ -1,20 +1,20 @@
 {
   "project_info": {
-    "project_number": "806791915928",
-    "project_id": "houseplant-329609",
-    "storage_bucket": "houseplant-329609.appspot.com"
+    "project_number": "89731374087",
+    "project_id": "houseplant-336112",
+    "storage_bucket": "houseplant-336112.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:806791915928:android:5f4939a8d4bd77572063ed",
+        "mobilesdk_app_id": "1:89731374087:android:f30500ec7c7761fe6adea2",
         "android_client_info": {
           "package_name": "com.houseplant"
         }
       },
       "oauth_client": [
         {
-          "client_id": "806791915928-d99s7qj9tokh98m9b0tsfcj3b23icli7.apps.googleusercontent.com",
+          "client_id": "89731374087-gim296tr4hk1l71fjfm13airtgopv202.apps.googleusercontent.com",
           "client_type": 1,
           "android_info": {
             "package_name": "com.houseplant",
@@ -22,20 +22,28 @@
           }
         },
         {
-          "client_id": "806791915928-f4l21th0bbrquhqvn6922p599kidf4jb.apps.googleusercontent.com",
+          "client_id": "89731374087-ujos5t0mvnli7gc5ukq2sdkm86i43co5.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.houseplant",
+            "certificate_hash": "5e8f16062ea3cd2c4a0d547876baa6f38cabf625"
+          }
+        },
+        {
+          "client_id": "89731374087-idru0s62rve5tunsnct7ms341ea0lcib.apps.googleusercontent.com",
           "client_type": 3
         }
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBJsR0DeMnRGgqRLlT6QiTexgCncliLXSM"
+          "current_key": "AIzaSyCG_OO7tJXeqC-xKS4xsIGNbSRz1tqIuXs"
         }
       ],
       "services": {
         "appinvite_service": {
           "other_platform_oauth_client": [
             {
-              "client_id": "806791915928-f4l21th0bbrquhqvn6922p599kidf4jb.apps.googleusercontent.com",
+              "client_id": "89731374087-idru0s62rve5tunsnct7ms341ea0lcib.apps.googleusercontent.com",
               "client_type": 3
             }
           ]

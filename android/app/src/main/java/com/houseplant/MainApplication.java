@@ -4,6 +4,8 @@ import android.app.Application;
 import android.content.Context;
 import com.facebook.react.PackageList;
 import com.facebook.react.ReactApplication;
+import cx.evermeet.versioninfo.RNVersionInfoPackage;
+import com.reactnativegooglesignin.RNGoogleSigninPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import com.reactnativecommunity.webview.RNCWebViewPackage;
 import io.invertase.firebase.messaging.ReactNativeFirebaseMessagingPackage;
